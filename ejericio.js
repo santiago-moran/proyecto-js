@@ -6,7 +6,7 @@ class Libros {
         this.precio = precio
     }
     mostrarLibro () {
-        alert (`${this.titulo.toUpperCase()}, de ${this.autor.toUpperCase()}. Precio: $${this.precio}`)
+        console.log (`${this.titulo.toUpperCase()}, de ${this.autor.toUpperCase()}. Precio: $${this.precio}`)
     }
 }
 const libro1 = new Libros(`Santiago Moran`, `Las Pulgas Locas`, 1500)
@@ -61,7 +61,7 @@ function opcionSwitch() {
 }
 
 function verCatalogoLibros() {
-    alert(`Catalogo de libros:`)
+    console.log(`Catalogo de libros:`)
     for (const element of biblioteca) {
         element.mostrarLibro()
     }
