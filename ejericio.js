@@ -19,12 +19,15 @@ const biblioteca = [libro1, libro2, libro3, libro4, libro5]
 
 /* VARIABLES LOCALES */
 function presentacion() {
-    let nombre = prompt((`Bienvenido. Ingrese su nombre, por favor: `))
+    let nombre = prompt(`Bienvenido/a. Ingrese su nombre, por favor: `)
+    while (nombre == "") {
+        nombre = prompt(`Usted tiene un nombre, recuérdelo y escribalo:`)
+    }
     alert(`Hola ${nombre}. Espero que puedas disfrutar este simulador :)`)
 }
 
 function opcionSwitch() {
-    let elegirOpcion = parseInt(prompt(`Por favor, elija una opcion: \n\n1. Ver catálogo de libros\n2. Agregar un nuevo libro al catálogo\n3. Buscar libro por titulo\n4. Buscar libro por precio\n5. Buscar libro por autor\n6. Ver titulos incluidos en el catálogo\n7. Ordenar catalogo de menor a mayor precio\n8. Eliminar un libro del catalogo\n9. Finalizar programa`))
+    let elegirOpcion = parseInt(prompt(`Por favor, elija una opcion: \n\n1. Ver catálogo de libros      2. Agregar un nuevo libro al catálogo\n3. Buscar libro por titulo       4. Buscar libro por precio\n5. Buscar libro por autor       6. Ver titulos incluidos en el catálogo\n7. Ordenar catalogo de menor a mayor precio\n8. Eliminar un libro del catalogo     9. Finalizar programa`))
     switch (elegirOpcion) {
         case 1:
             verCatalogoLibros()
@@ -73,10 +76,10 @@ function verCatalogoLibros() {
 
 function agregarNuevoLibro() {
     let nuevoTitulo = prompt(`Por favor, ingrese el título de su nuevo libro: `)
-    const tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo)
+    let tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo.toUpperCase())
     while (tituloRep == true) {
         nuevoTitulo = prompt(`Ese titulo ya existe. Por favor, ingrese otro titulo:`)
-        tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo)
+        tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo.toUpperCase())
     }
     let nuevoAutor = prompt(`Por favor, ingrese el autor de su nuevo libro: `)
     let nuevoPrecio = parseInt(prompt(`Por favor, ingrese el precio de su nuevo libro: `))
@@ -94,9 +97,21 @@ function agregarNuevoLibro() {
 
 function buscarTitulo() {
     let nombreTitulo = prompt(`Ingrese el titulo del libro que desea buscar: `)
+    if (nombreTitulo == null) {
+        opcionSwitch()
+    }
+    while (nombreTitulo == "") {
+        nombreTitulo = prompt(`Debe ingresar un nombre para la busqueda: `) 
+    }
     let filtrarTitulo = biblioteca.filter((libro) => libro.titulo.toLowerCase().includes(nombreTitulo.toLowerCase()))
     while (filtrarTitulo.length == 0) {
-        nombreTitulo = prompt(`El titulo ${nombreTitulo} no se encuentra en el catálogo. Ingrese otro titulo: `)
+        nombreTitulo = prompt(`El titulo "${nombreTitulo}" no se encuentra en el catálogo. Ingrese otro titulo: `)
+        if (nombreTitulo == null) {
+            opcionSwitch()
+        }
+        while (nombreTitulo == "") {
+            nombreTitulo = prompt(`Debe ingresar un nombre para la busqueda: `) 
+        }
         filtrarTitulo = biblioteca.filter((libro) => libro.titulo.includes(nombreTitulo))
     }
     if (filtrarTitulo.length == 0) {
@@ -114,9 +129,21 @@ function buscarTitulo() {
 
 function buscarPrecio() {
     let precioLibro = parseFloat(prompt(`Ingrese el precio del libro que desea buscar: `))
+    if (precioLibro == null) {
+        opcionSwitch()
+    }
+    while (precioLibro == "") {
+        precioLibro = prompt(`Debe ingresar un nombre para la busqueda: `) 
+    }
     let filtrarPrecio = biblioteca.filter((libro) => libro.precio == (precioLibro))
     while (filtrarPrecio.length == 0) {
         precioLibro = parseFloat(prompt(`El precio indicado no coincide con ningun libro en el catálogo. Ingrese otro precio: `))
+        if (precioLibro == null) {
+            opcionSwitch()
+        }
+        while (precioLibro == "") {
+            precioLibro = prompt(`Debe ingresar un nombre para la busqueda: `) 
+        }
         filtrarPrecio = biblioteca.filter((libro) => libro.precio == (parseFloat(precioLibro)))
     }
     if (filtrarPrecio.length == 0) {
@@ -134,9 +161,21 @@ function buscarPrecio() {
 
 function buscarAutor() {
     let nombreAutor = prompt(`Ingrese el nombre del autor del libro que desea buscar: `)
+    if (nombreAutor == null) {
+        opcionSwitch()
+    }
+    while (nombreAutor == "") {
+        nombreTitulo = prompt(`Debe ingresar un nombre para la busqueda: `) 
+    }
     let filtrarNombre = biblioteca.filter((libro) => libro.autor.toLowerCase().includes(nombreAutor.toLowerCase()))
     while (filtrarNombre.length == 0) {
-        nombreAutor = prompt(`El autor ${nombreAutor} no se encuentra en el catálogo. Ingrese otro autor: `)
+        nombreAutor = prompt(`El autor "${nombreAutor}" no se encuentra en el catálogo. Ingrese otro autor: `)
+        if (nombreAutor == null) {
+            opcionSwitch()
+        }
+        while (nombreTitulo == "") {
+            nombreAutor = prompt(`Debe ingresar un nombre para la busqueda: `) 
+        }
         filtrarNombre = biblioteca.filter((libro) => libro.autor.toUpperCase().includes(nombreAutor.toUpperCase()))
         }
     if (filtrarNombre.length == 0) {
@@ -187,7 +226,7 @@ function eliminarLibro() {
         }
     }
     while (band == false) {
-        deleteBook = prompt(`No se ha encontrado ningun libro con ese titulo. Ingrese un nuevo titulo:`)
+        deleteBook = prompt(`El titulo "${deleteBook}" no se encuentra en el catalogo. Ingrese un nuevo titulo:`)
         for (const el of biblioteca) {
             if (el.titulo.toUpperCase() == deleteBook.toUpperCase()) {
                 band = true
