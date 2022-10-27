@@ -9,11 +9,11 @@ class Libros {
         console.log (`${this.titulo.toUpperCase()}, de ${this.autor.toUpperCase()}. Precio: $${this.precio}`)
     }
 }
-const libro1 = new Libros(`Santiago Moran`, `Las Pulgas Locas`, 1500)
-const libro2 = new Libros(`Agustina Rivero`, `Toxicidad Pura`, 1850)
-const libro3 = new Libros(`Ignacio Moran`, `Lucha con los Brazos`, 1435)
-const libro4 = new Libros(`Zoel Reising`, `El Mal de Amores`, 1100)
-const libro5 = new Libros(`Paula Guinard`, `Folklore para Tod@s`, 1320)
+const libro1 = new Libros(`Myriam M. Lejardi`, `Prende Fuego a la Noche`, 4999)
+const libro2 = new Libros(`Stephen King`, `Cuento de Hadas`, 8999)
+const libro3 = new Libros(`Karen M. McManus`, `Alguien está mintiendo`, 3649)
+const libro4 = new Libros(`Jennifer Lynn Barnes`, `Una Herencia en Juego`, 4199)
+const libro5 = new Libros(`Henry James`, `Otra Vuelta de Tuerca`, 2449)
 
 const biblioteca = [libro1, libro2, libro3, libro4, libro5]
 
