@@ -11,11 +11,12 @@ class Libros {
 }
 const libro1 = new Libros(`Myriam M. Lejardi`, `Prende Fuego a la Noche`, 4999)
 const libro2 = new Libros(`Stephen King`, `Cuento de Hadas`, 8999)
-const libro3 = new Libros(`Karen M. McManus`, `Alguien está mintiendo`, 3649)
+const libro3 = new Libros(`Karen M. McManus`, `Alguien esta Mintiendo`, 3649)
 const libro4 = new Libros(`Jennifer Lynn Barnes`, `Una Herencia en Juego`, 4199)
 const libro5 = new Libros(`Henry James`, `Otra Vuelta de Tuerca`, 2449)
 
 const biblioteca = [libro1, libro2, libro3, libro4, libro5]
+let precioTotal = 0
 
 /* VARIABLES LOCALES */
 function presentacion() {
@@ -27,7 +28,7 @@ function presentacion() {
 }
 
 function opcionSwitch() {
-    let elegirOpcion = parseInt(prompt(`Por favor, elija una opcion: \n\n1. Ver catálogo de libros      2. Agregar un nuevo libro al catálogo\n3. Buscar libro por titulo       4. Buscar libro por precio\n5. Buscar libro por autor       6. Ver titulos incluidos en el catálogo\n7. Ordenar catalogo de menor a mayor precio\n8. Eliminar un libro del catalogo     9. Finalizar programa`))
+    let elegirOpcion = parseInt(prompt(`Por favor, elija una opcion: \n\n1. Ver catálogo de libros      2. Agregar un nuevo libro al catálogo\n3. Buscar libro por titulo       4. Buscar libro por precio\n5. Buscar libro por autor       6. Ver titulos incluidos en el catálogo\n7. Ordenar catalogo de menor a mayor precio\n8. Eliminar un libro del catalogo     9. Agregar libros al carrito\n10. Salir del programa`))
     switch (elegirOpcion) {
         case 1:
             verCatalogoLibros()
@@ -53,7 +54,10 @@ function opcionSwitch() {
         case 8:
             eliminarLibro()
             break;
-        case 9: 
+        case 9:
+            carritoCompras()
+            break;
+        case 10: 
             alert(`PROCEDIENDO A SALIR DEL PROGRAMA`)
             break;
         default:
@@ -76,13 +80,25 @@ function verCatalogoLibros() {
 
 function agregarNuevoLibro() {
     let nuevoTitulo = prompt(`Por favor, ingrese el título de su nuevo libro: `)
+    while (nuevoTitulo == "") {
+        nuevoTitulo = prompt(`Debe ingresar un titulo: `) 
+    }
     let tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo.toUpperCase())
     while (tituloRep == true) {
         nuevoTitulo = prompt(`Ese titulo ya existe. Por favor, ingrese otro titulo:`)
+        while (nuevoTitulo == "") {
+            nuevoTitulo = prompt(`Debe ingresar un titulo: `) 
+        }
         tituloRep = biblioteca.some( element => element.titulo == nuevoTitulo.toUpperCase())
     }
     let nuevoAutor = prompt(`Por favor, ingrese el autor de su nuevo libro: `)
+    while (nuevoAutor == "") {
+        nuevoAutor = prompt(`Debe ingresar un autor: `) 
+    }
     let nuevoPrecio = parseInt(prompt(`Por favor, ingrese el precio de su nuevo libro: `))
+    while (nuevoPrecio == "" || nuevoPrecio == 0) {
+        nuevoPrecio = prompt(`Debe ingresar un precio: `) 
+    }
     const libroNuevo = new Libros(nuevoAutor, nuevoTitulo, nuevoPrecio)
     biblioteca.push(libroNuevo)
     alert(`Mostrando nuevo catalogo en consola`)
@@ -190,6 +206,7 @@ function buscarAutor() {
     alert(`Volviendo al menú principal...`)
     opcionSwitch()
 }
+
 function verTitulos() {
     console.log(`Titulos incluidos en el catálogo:`)
     biblioteca.forEach( book => {console.log(book.titulo.toUpperCase())})
@@ -197,6 +214,7 @@ function verTitulos() {
     alert(`Volviendo al menú principal...`)
     opcionSwitch()
 }
+
 function ordenarMenorMayor() {
     console.log(`Catalogo ordenado de menor a mayor precio:`)
     biblioteca.sort( (a, b) => a.precio - b.precio )
@@ -207,9 +225,16 @@ function ordenarMenorMayor() {
     alert(`Volviendo al menú principal...`)
     opcionSwitch()
 }
+
 function eliminarLibro() {
     let band = false
+    console.log(`Lista de libros:`)
+    biblioteca.forEach (el=>el.mostrarLibro())
+    console.log(`\n`)
     let deleteBook = prompt(`Ingrese el titulo del libro que desea eliminar:`)
+    while (deleteBook == "") {
+        deleteBook = prompt(`Debe ingresar un titulo: `) 
+    }
     for (const el of biblioteca) {
         if (el.titulo.toUpperCase() == deleteBook.toUpperCase()) {
             let preguntaSegura = prompt(`Esta seguro/a que desea eliminar este libro? (Responder si o no)`)
@@ -242,5 +267,86 @@ function eliminarLibro() {
         opcionSwitch()
     }
 }
+
+function carritoCompras() {
+    alert(`Mostrando en consola el catalogo para comprar...`)
+    console.log(`Libros para comprar:`)
+    biblioteca.forEach( element => element.mostrarLibro())
+    console.log(`\n`)
+    let nombreLibro = prompt(`Escriba el titulo del libro que desea agregar:`)
+    while (nombreLibro == "") {
+        nombreLibro = prompt(`Debe ingresar un titulo: `) 
+    }
+    let carrito = biblioteca.some( el => el.titulo.includes(nombreLibro.toUpperCase()))
+    while (carrito == false) {
+        nombreLibro = prompt(`Ese libro no se encuentra en el catalogo. Ingrese otro titulo: `)
+        while (nombreLibro == "") {
+            nombreLibro = prompt(`Debe ingresar un titulo: `) 
+        }
+        carrito = biblioteca.some( el => el.titulo.includes(nombreLibro.toUpperCase()))
+    }
+    if (carrito == true) {
+        let carritoCompra = biblioteca.filter (book => book.titulo.includes(nombreLibro.toUpperCase()))
+        if (carritoCompra.length > 1) {
+            console.log(`Libros encontrados: `)
+            carritoCompra.forEach ( element => element.mostrarLibro())
+            console.log(`\n`)
+            let elegirLibro = prompt(`Se encontraron varios libros (Mostrados en consola), debe escribir el titulo del que desea agregar:`)
+            while (elegirLibro == "") {
+                elegirLibro = prompt(`Debe ingresar un titulo: `) 
+            }
+            carrito = biblioteca.some( el => el.titulo == elegirLibro.toUpperCase())
+            while (carrito == false) {
+                elegirLibro = prompt(`El titulo no coincide con la busqueda. Ingreselo nuevamente:`)
+                while (elegirLibro == "") {
+                    elegirLibro = prompt(`Debe ingresar un titulo: `) 
+                }
+                carrito = biblioteca.some( el => el.titulo == elegirLibro.toUpperCase())
+            }
+            if (carrito == true) {
+                carritoCompra = biblioteca.filter (libro => libro.titulo == elegirLibro.toUpperCase())
+                alert(`Usted ha agregado el siguiente libro (Mostrado en consola):`)
+                console.log(`Libro agregado:`)
+                carritoCompra.forEach (book => book.mostrarLibro())
+                console.log(`\n`)
+                precioTotal += carritoCompra[0].precio
+                let agregarSiNo = prompt(`Desea seguir agregando libros? (Responder si o no)`)
+                while (agregarSiNo.toLowerCase() != 'si' && agregarSiNo.toLowerCase() != 'no') {
+                    agregarSiNo = prompt(`Debe responder si o no:`)
+                }
+                if (agregarSiNo.toLowerCase() == 'si') {
+                    carritoCompras()
+                }
+                else if (agregarSiNo.toLowerCase() == 'no') {
+                    alert(`Gastado: $${precioTotal}`)
+                    precioTotal = 0
+                    alert(`Volviendo al menu principal...`)
+                    opcionSwitch()
+                }  
+            }
+        }
+        else {
+            alert(`Usted ha agregado el siguiente libro (Mostrado en consola):`)
+            console.log(`Libro agregado:`)
+            carritoCompra.forEach (book => book.mostrarLibro())
+            console.log(`\n`)
+            precioTotal += carritoCompra[0].precio
+            let agregarSiNo = prompt(`Desea seguir agregando libros? (Responder si o no)`)
+            while (agregarSiNo.toLowerCase() != 'si' && agregarSiNo.toLowerCase() != 'no') {
+                agregarSiNo = prompt(`Debe responder si o no:`)
+            }
+            if (agregarSiNo.toLowerCase() == 'si') {
+                carritoCompras()
+            }
+            else if (agregarSiNo.toLowerCase() == 'no') {
+                alert(`Gastado: $${precioTotal}`)
+                precioTotal = 0
+                alert(`Volviendo al menu principal...`)
+                opcionSwitch()
+            }  
+        }
+    }
+}
+
 presentacion()
 opcionSwitch()
