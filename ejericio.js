@@ -1,4 +1,3 @@
-/* VARIABLES GENERALES */
 class Libros {
     constructor(autor, titulo, precio) {
         this.autor = autor.toUpperCase()
@@ -18,7 +17,6 @@ const libro5 = new Libros(`Henry James`, `Otra Vuelta de Tuerca`, 2449)
 const biblioteca = [libro1, libro2, libro3, libro4, libro5]
 let precioTotal = 0
 
-/* VARIABLES LOCALES */
 function presentacion() {
     let nombre = prompt(`Bienvenido/a. Ingrese su nombre, por favor: `)
     while (nombre == "") {
