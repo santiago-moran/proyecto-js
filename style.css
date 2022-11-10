@@ -1,0 +1,64 @@
+body {
+    background-color: antiquewhite;
+}
+.navbar {
+    background-color:coral;
+    border-bottom: solid 2px black;
+}
+.offcanvas-header {
+    background-color: coral;
+    border-bottom: solid 2px black;
+}
+.btn {
+    background-color: green;
+    color: white;
+    border: solid 2px black;
+}
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.card {
+    border: solid 3px black;
+    margin-top: 50px;
+}
+.inputProd {
+    width: 20%;
+}
+.card-img-top {
+    height: 282px;
+    object-fit: cover;
+}
+.spanCarrito {
+    font-weight: 700;
+}
+.nav-item {
+    padding: 5px;
+    margin-top: 5%;
+    border: solid 5px black;
+    border-radius: 10px;
+}
+#btnCarrito {
+    padding: 20px;
+    border: solid 2px black;
+}
+.fa-solid {
+    color: black;
+}
+.eliminar {
+    border: none;
+    background-color: white;
+}
+.fa-trash:hover {
+    color: red;
+}
+.textoCarrVacio {
+    text-align: center;
+}
+.carta p{
+    margin-top: 10%;
+    text-align: center;
+}
