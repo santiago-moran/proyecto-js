@@ -1,4 +1,3 @@
-/* CARRITO VERDURAS */
 class Verduleria {
     constructor(id, producto, precio, cantidad, imagen) {
         this.id = id
@@ -15,48 +14,63 @@ const prod4 = new Verduleria(4, 'Naranja', 200, 0, 'https://www.cuerpomente.com/
 const prod5 = new Verduleria(5, 'Durazno', 450, 0, 'https://www.prensalibre.com/wp-content/uploads/2019/08/Durazno.jpg?quality=52')
 const prod6 = new Verduleria(6, 'Limon', 135, 0, 'https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg')
 const verduras = [prod1, prod2, prod3, prod4, prod5, prod6]
-const carrito = []
+let carrito = []
+let total = 0
+let traerDatos = localStorage.getItem('carrito')
+if (traerDatos.length > 0) {
+    traerDatos = JSON.parse(localStorage.getItem('carrito'))
+}
 
 function mostrarCards (array) {
     let cards = document.getElementById('cards')
     cards.innerHTML = ""
-    for (let verdura of array) {
-        let siEsta = carrito.filter(el => verdura == el)
-        if (siEsta.length > 0) {
-            let nuevoElement = document.createElement('div')
-            nuevoElement.innerHTML = ""
-            nuevoElement.innerHTML += `<div class="card" style="width: 18rem;">
-                                <img src=${verdura.imagen} class= "card-img-top" alt= "Imagen de ${verdura.producto}">
-                                <div class="card-body" id="card${verdura.id}">
-                                    <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
-                                    <h5 class="card-title">Precio: $${verdura.precio}</h5>
-                                    <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: ${verdura.cantidad}</h5>
-                                    <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
-                                    <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregado</a>
-                                </div>
-                            </div>`
-            cards.appendChild(nuevoElement)
-        }
-        else {
-            let nuevoElement = document.createElement('div')
-            nuevoElement.innerHTML = ""
-            nuevoElement.innerHTML += `<div class="card" style="width: 18rem;">
-                                <img src=${verdura.imagen} class= "card-img-top" alt= "Imagen de ${verdura.producto}">
-                                <div class="card-body" id="card${verdura.id}">
-                                    <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
-                                    <h5 class="card-title">Precio: $${verdura.precio}</h5>
-                                    <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
-                                    <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
-                                    <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregar al Carrito</a>
-                                </div>
-                            </div>`
-            cards.appendChild(nuevoElement)
-        }
-        let btnAgregar = document.getElementById(`btnAgregar${verdura.id}`)
-        btnAgregar.onclick = () => {
-            AgregarAlCarrito(verdura, btnAgregar)
+    if (traerDatos) {
+        carrito = traerDatos
+        for (let el of carrito) {
+            total += el.precio*el.cantidad
         }
     }
+        for (let verdura of array) {
+            let siEsta = carrito.filter(el => verdura.producto == el.producto)
+            if (siEsta.length > 0) {
+                for (let el of siEsta) {
+                    verdura.cantidad = el.cantidad
+                    verdura.precio = el.precio
+                }
+                let nuevoElement = document.createElement('div')
+                nuevoElement.innerHTML = ""
+                nuevoElement.innerHTML += `<div class="card" style="width: 18rem;">
+                                    <img src=${verdura.imagen} class= "card-img-top" alt= "Imagen de ${verdura.producto}">
+                                    <div class="card-body" id="card${verdura.id}">
+                                        <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
+                                        <h5 class="card-title">Precio: $${verdura.precio}</h5>
+                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: ${verdura.cantidad}</h5>
+                                        <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregado</a>
+                                    </div>
+                                </div>`
+                cards.appendChild(nuevoElement)
+            }
+            else {
+                let nuevoElement = document.createElement('div')
+                nuevoElement.innerHTML = ""
+                nuevoElement.innerHTML += `<div class="card" style="width: 18rem;">
+                                    <img src=${verdura.imagen} class= "card-img-top" alt= "Imagen de ${verdura.producto}">
+                                    <div class="card-body" id="card${verdura.id}">
+                                        <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
+                                        <h5 class="card-title">Precio: $${verdura.precio}</h5>
+                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
+                                        <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregar al Carrito</a>
+                                    </div>
+                                </div>`
+                cards.appendChild(nuevoElement)
+            }
+            let btnAgregar = document.getElementById(`btnAgregar${verdura.id}`)
+            btnAgregar.onclick = () => {
+                AgregarAlCarrito(verdura, btnAgregar)
+            }
+        }    
 }
 function AgregarAlCarrito (element, boton) {
     if (boton.innerText == 'Agregado') {
@@ -69,12 +83,13 @@ function AgregarAlCarrito (element, boton) {
             alert('DATOS INCOMPLETOS')
         }
         else {
+            total += element.precio*element.cantidad
             carrito.push(element)
             carrito.sort( (a, b) => a.id - b.id )
-            console.log(carrito)
             boton.innerText = 'Agregado'
             let idCantidad = document.getElementById(`idCantidad${element.id}`)
             idCantidad.innerHTML = `Cantidad*: ${element.cantidad}`
+            localStorage.setItem('carrito', JSON.stringify(carrito))
         }
     }
 }
@@ -91,6 +106,14 @@ function mostrarCarrito (array) {
                                         <p><span class= "spanCarrito"> Id: </span>${el.id} <span class= "spanCarrito"> Producto: </span> ${el.producto} <span class= "spanCarrito"> Cantidad: </span> ${el.cantidad}<span class= "spanCarrito"> Precio: </span> $${el.precio*el.cantidad}</p> <button class= "eliminar" id= "btnEliminar${el.id}"> <i class="fa-solid fa-trash"></i> </button>
                                     </li>`
         }
+        let crearli = document.createElement('li')
+        crearli.classList.add(`liFinalizarCompra`)
+        crearli.innerHTML = `<p id= "total">Total: ${total}</p>
+                            <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
+        if (ulCarrito.innerText == `(Carrito Vacío)`) {
+            crearli.innerHTML = ""
+        }
+        ulCarrito.appendChild(crearli)
         array.forEach ((verd) => {
             let btnEliminar = document.getElementById(`btnEliminar${verd.id}`)
             btnEliminar.onclick = () => {
@@ -100,11 +123,14 @@ function mostrarCarrito (array) {
     }
 }
 function eliminarProducto (arreglo, prod) {
+    total -= prod.cantidad*prod.precio
+    let totalText = document.getElementById (`total`)
+    totalText.innerHTML = `<p id= "total">Total: ${total}</p>`
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     let btnAgregar = document.getElementById(`btnAgregar${prod.id}`)
     liCarrito.remove()
     arreglo.splice(arreglo.indexOf(prod), 1)
-    console.log(arreglo)
+    localStorage.setItem('carrito', arreglo)
     let ulCarrito = document.getElementById(`ulCarrito`)
     if (arreglo.length == 0) {
         ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`
