@@ -116,16 +116,16 @@ function mostrarCarrito (array) {
         array.forEach ((verd) => {
             let btnEliminar = document.getElementById(`btnEliminar${verd.id}`)
             btnEliminar.onclick = () => {
-                eliminarProducto(array, verd)
+                eliminarProducto(array, verd, crearli)
             }
         })
     }
 }
-function eliminarProducto (arreglo, prod) {
+function eliminarProducto (arreglo, prod, crearli) {
     total -= prod.cantidad*prod.precio
     let ulCarrito = document.getElementById(`ulCarrito`)
-    let totalText = document.getElementById (`total`)
-    totalText.innerHTML = `<p id= "total">Total: ${total}</p>`
+    crearli.innerHTML = `<p id= "total">Total: ${total}</p>
+                            <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     let btnAgregar = document.getElementById(`btnAgregar${prod.id}`)
     liCarrito.remove()
@@ -140,11 +140,11 @@ function eliminarProducto (arreglo, prod) {
     btnAgregar.innerText = 'Agregar al Carrito'
     let idCantidad = document.getElementById(`idCantidad${prod.id}`)
     idCantidad.innerHTML = `<h5 class="card-title" id= "idCantidad${prod.id}">Cantidad*: <input type="text" class="inputProd" id="input${prod.id}"></h5>`
-    console.log(arreglo)
     btnAgregar.onclick = () => {
         AgregarAlCarrito(prod, btnAgregar)
     }
     mostrarCarrito(arreglo)
+    finalizarCompra (ulCarrito)
 }
 function buscarCards (array) {
     let buscadorCard = document.getElementById(`buscadorCard`)
