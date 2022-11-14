@@ -129,12 +129,7 @@ function eliminarProducto (arreglo, prod) {
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     let btnAgregar = document.getElementById(`btnAgregar${prod.id}`)
     liCarrito.remove()
-    if (arreglo.length == 1) {
-        arreglo.splice(0, 1)
-    }
-    else {
-        arreglo.splice(arreglo.indexOf(prod), 1)
-    }
+    arreglo.length == 1 ? arreglo.splice(0, 1) : arreglo.splice(arreglo.indexOf(prod), 1)
     if (arreglo.length == 0) {
         localStorage.removeItem('carrito')
         ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`
@@ -184,6 +179,12 @@ function finalizarCompra (ulCarrito) {
                 document.getElementById(`btnAgregar${element.id}`).innerText = `Agregar al Carrito`
             }
         }
+        Swal.fire({
+            title: 'Genial!',
+            text: 'Compra exitosa!',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
     }
 }
 mostrarCards(verduras)
