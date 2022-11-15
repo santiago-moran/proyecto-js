@@ -93,9 +93,13 @@ function AgregarAlCarrito (element, boton) {
     else {
         let input = document.getElementById(`input${element.id}`)
         element.cantidad = input.value
-        if (input.value == "" || input.value == 0 || input.value < 0) {
+        if (input.value == "" || input.value == 0) {
             let textCard = document.getElementById(`textCard${element.id}`)
             textCard.innerHTML = `<p class= "card-text textoRojo">*Datos Incompletos</p>`
+        }
+        else if (input.value < 0) {
+            let textCard = document.getElementById(`textCard${element.id}`)
+            textCard.innerHTML = `<p class= "card-text textoRojo">*Dato Inválido</p>`
         }
         else {
             let textCard = document.getElementById(`textCard${element.id}`)
