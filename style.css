@@ -80,3 +80,11 @@ body {
 .textoRojo {
     color: red;
 }
+.divBotones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+.btnRed {
+    background-color: red;
+}

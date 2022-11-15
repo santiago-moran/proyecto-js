@@ -40,10 +40,9 @@ function mostrarCards (array) {
                                         <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
                                         <h5 class="card-title">Precio: $${verdura.precio}</h5>
                                         <div id= "divCantidad${verdura.id}">
-                                            <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: ${verdura.cantidad}</h5>
+                                            <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad: ${verdura.cantidad}</h5>
                                         </div>
                                         <div id= "textCard${verdura.id}">
-                                            <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
                                         </div>
                                         <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregado</a>
                                     </div>
@@ -59,10 +58,9 @@ function mostrarCards (array) {
                                         <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
                                         <h5 class="card-title">Precio: $${verdura.precio}</h5>
                                         <div id= "divCantidad${verdura.id}">
-                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
+                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
                                         </div>
                                         <div id= "textCard${verdura.id}">
-                                            <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
                                         </div>
                                         <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregar al Carrito</a>
                                     </div>
@@ -97,17 +95,16 @@ function AgregarAlCarrito (element, boton) {
         element.cantidad = input.value
         if (input.value == "" || input.value == 0) {
             let textCard = document.getElementById(`textCard${element.id}`)
-            textCard.innerHTML = `<p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
-                                    <p class= "card-text textoRojo">*Datos Incompletos</p>`
+            textCard.innerHTML = `<p class= "card-text textoRojo">*Datos Incompletos</p>`
         }
         else {
             let textCard = document.getElementById(`textCard${element.id}`)
-            textCard.innerHTML = `<p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>`
+            textCard.innerHTML = ``
             carrito.push(element)
             carrito.sort( (a, b) => a.id - b.id )
             boton.innerText = 'Agregado'
             let idCantidad = document.getElementById(`idCantidad${element.id}`)
-            idCantidad.innerText = `Cantidad*: ${element.cantidad}`
+            idCantidad.innerText = `Cantidad: ${element.cantidad}`
             localStorage.setItem('carrito', JSON.stringify(carrito))
         }
     }
@@ -121,7 +118,13 @@ function mostrarCarrito (array) {
         }
         for (let el of array) {
             ulCarrito.innerHTML += `<li class="nav-item" id= "liCarrito${el.id}">
-                                        <p><span class= "spanCarrito"> Id: </span>${el.id} <span class= "spanCarrito"> Producto: </span> ${el.producto} <span class= "spanCarrito"> Cantidad: </span> ${el.cantidad}<span class= "spanCarrito"> Precio: </span> $${el.precio*el.cantidad}</p> <button class= "eliminar" id= "btnEliminar${el.id}"> <i class="fa-solid fa-trash"></i> </button>
+                                        <p><span class= "spanCarrito"> Id: </span>${el.id} <span class= "spanCarrito"> Producto: </span> ${el.producto} <span class= "spanCarrito"> Cantidad: </span> ${el.cantidad}<span class= "spanCarrito"> Precio: </span> $${el.precio*el.cantidad}</p> 
+                                        <div class= "divBotones">
+                                            <button class= "eliminar" id= "btnEliminar${el.id}"> <i class="fa-solid fa-trash"></i> </button> 
+                                            <div class= "divMasMenos">
+                                                <button class= "btn btn-primary" id= "btnSumar${el.id}">+</button> <button class= "btn btn-primary btnRed" id= "btnRestar${el.id}">-</button
+                                            </div>
+                                        </div>
                                     </li>`
             total += el.precio*el.cantidad             
         }
@@ -142,6 +145,18 @@ function mostrarCarrito (array) {
                 eliminarProducto(array, verd, crearli)
             }
         })
+        array.forEach ((el) => {
+            let btnSumar = document.getElementById(`btnSumar${el.id}`)
+            btnSumar.onclick = () => {
+                sumarProductos (el, array)
+            }
+        })
+        array.forEach ((el) => {
+            let btnRestar = document.getElementById(`btnRestar${el.id}`)
+            btnRestar.onclick = () => {
+                restarProductos (el, array)
+            }
+        })
 }
 function eliminarProducto (arreglo, prod, crearli) {
     total -= prod.cantidad*prod.precio
@@ -160,6 +175,23 @@ function eliminarProducto (arreglo, prod, crearli) {
     }
     mostrarCards(verduras)
     mostrarCarrito(arreglo)
+}
+function sumarProductos (element, array) {
+    element.cantidad ++
+    localStorage.setItem('carrito', JSON.stringify(array))
+    mostrarCards (verduras)
+    mostrarCarrito (array)
+}
+function restarProductos (element, array) {
+    if (element.cantidad == 1) {
+        element.cantidad = element.cantidad
+    }
+    else {
+        element.cantidad --
+        localStorage.setItem('carrito', JSON.stringify(array))
+        mostrarCards (verduras)
+        mostrarCarrito (array)
+    }
 }
 function buscarCards (array) {
     let buscadorCard = document.getElementById(`buscadorCard`)
