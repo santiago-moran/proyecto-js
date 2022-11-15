@@ -58,7 +58,7 @@ function mostrarCards (array) {
                                         <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
                                         <h5 class="card-title">Precio: $${verdura.precio}</h5>
                                         <div id= "divCantidad${verdura.id}">
-                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
+                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad: <input type="num" class="inputProd" id="input${verdura.id}"></h5>
                                         </div>
                                         <div id= "textCard${verdura.id}">
                                         </div>
@@ -93,15 +93,7 @@ function AgregarAlCarrito (element, boton) {
     else {
         let input = document.getElementById(`input${element.id}`)
         element.cantidad = input.value
-        if (input.value == "" || input.value == 0) {
-            let textCard = document.getElementById(`textCard${element.id}`)
-            textCard.innerHTML = `<p class= "card-text textoRojo">*Datos Incompletos</p>`
-        }
-        else if (input.value < 0) {
-            let textCard = document.getElementById(`textCard${element.id}`)
-            textCard.innerHTML = `<p class= "card-text textoRojo">*Dato Inválido</p>`
-        }
-        else {
+        if (input.value > 0) {
             let textCard = document.getElementById(`textCard${element.id}`)
             textCard.innerHTML = ``
             carrito.push(element)
@@ -110,6 +102,14 @@ function AgregarAlCarrito (element, boton) {
             let idCantidad = document.getElementById(`idCantidad${element.id}`)
             idCantidad.innerText = `Cantidad: ${element.cantidad}`
             localStorage.setItem('carrito', JSON.stringify(carrito))
+        }
+        else if (input.value == "" || input.value == 0) {
+            let textCard = document.getElementById(`textCard${element.id}`)
+            textCard.innerHTML = `<p class= "card-text textoRojo">*Datos Incompletos</p>`
+        }
+        else {
+            let textCard = document.getElementById(`textCard${element.id}`)
+            textCard.innerHTML = `<p class= "card-text textoRojo">*Dato Inválido</p>`
         }
     }
 }
