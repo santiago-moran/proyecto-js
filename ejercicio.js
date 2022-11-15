@@ -39,8 +39,12 @@ function mostrarCards (array) {
                                     <div class="card-body" id="card${verdura.id}">
                                         <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
                                         <h5 class="card-title">Precio: $${verdura.precio}</h5>
-                                        <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: ${verdura.cantidad}</h5>
-                                        <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        <div id= "divCantidad${verdura.id}">
+                                            <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: ${verdura.cantidad}</h5>
+                                        </div>
+                                        <div id= "textCard${verdura.id}">
+                                            <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        </div>
                                         <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregado</a>
                                     </div>
                                 </div>`
@@ -54,8 +58,12 @@ function mostrarCards (array) {
                                     <div class="card-body" id="card${verdura.id}">
                                         <h5 class="card-title">${verdura.id}. ${verdura.producto}</h5>
                                         <h5 class="card-title">Precio: $${verdura.precio}</h5>
+                                        <div id= "divCantidad${verdura.id}">
                                         <h5 class="card-title" id= "idCantidad${verdura.id}">Cantidad*: <input type="text" class="inputProd" id="input${verdura.id}"></h5>
-                                        <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        </div>
+                                        <div id= "textCard${verdura.id}">
+                                            <p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                        </div>
                                         <a class="btn btn-primary" id="btnAgregar${verdura.id}">Agregar al Carrito</a>
                                     </div>
                                 </div>`
@@ -65,31 +73,46 @@ function mostrarCards (array) {
             btnAgregar.onclick = () => {
                 AgregarAlCarrito(verdura, btnAgregar)
             }
+            let btnCarrito = document.getElementById(`btnCarrito`)
+            btnCarrito.onclick = () => {
+                mostrarCarrito(carrito)
+            }
+            
         }    
 }
 function AgregarAlCarrito (element, boton) {
     if (boton.innerText == 'Agregado') {
-        alert('PRODUCTO EN CARRITO')
+        Toastify({
+            text: `Producto en Carrito`,
+            duration: 1000,
+            position: 'center',
+            className: `btnToast`,
+            style: {
+                background: `red`
+            }
+        }).showToast();
     }
     else {
         let input = document.getElementById(`input${element.id}`)
         element.cantidad = input.value
         if (input.value == "" || input.value == 0) {
-            alert('DATOS INCOMPLETOS')
+            let textCard = document.getElementById(`textCard${element.id}`)
+            textCard.innerHTML = `<p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>
+                                    <p class= "card-text textoRojo">*Datos Incompletos</p>`
         }
         else {
+            let textCard = document.getElementById(`textCard${element.id}`)
+            textCard.innerHTML = `<p class="card-text">*Una vez agregado al carrito, no podrá modificarse la cantidad.</p>`
             carrito.push(element)
             carrito.sort( (a, b) => a.id - b.id )
             boton.innerText = 'Agregado'
             let idCantidad = document.getElementById(`idCantidad${element.id}`)
-            idCantidad.innerHTML = `Cantidad*: ${element.cantidad}`
+            idCantidad.innerText = `Cantidad*: ${element.cantidad}`
             localStorage.setItem('carrito', JSON.stringify(carrito))
         }
     }
 }
 function mostrarCarrito (array) {
-    let btnCarrito = document.getElementById(`btnCarrito`)
-    btnCarrito.onclick = () => {
         total = 0
         let ulCarrito = document.getElementById(`ulCarrito`)
         ulCarrito.innerHTML = ""
@@ -111,7 +134,7 @@ function mostrarCarrito (array) {
         else {
             crearli.innerHTML = `<p id= "total">Total: ${total}</p>
                             <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
-            finalizarCompra (ulCarrito)
+            finalizarCompra()
         }
         array.forEach ((verd) => {
             let btnEliminar = document.getElementById(`btnEliminar${verd.id}`)
@@ -119,7 +142,6 @@ function mostrarCarrito (array) {
                 eliminarProducto(array, verd, crearli)
             }
         })
-    }
 }
 function eliminarProducto (arreglo, prod, crearli) {
     total -= prod.cantidad*prod.precio
@@ -127,7 +149,6 @@ function eliminarProducto (arreglo, prod, crearli) {
     crearli.innerHTML = `<p id= "total">Total: ${total}</p>
                             <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
-    let btnAgregar = document.getElementById(`btnAgregar${prod.id}`)
     liCarrito.remove()
     arreglo.length == 1 ? arreglo.splice(0, 1) : arreglo.splice(arreglo.indexOf(prod), 1)
     if (arreglo.length == 0) {
@@ -137,14 +158,8 @@ function eliminarProducto (arreglo, prod, crearli) {
     else {
         localStorage.setItem('carrito', JSON.stringify(arreglo))
     }
-    btnAgregar.innerText = 'Agregar al Carrito'
-    let idCantidad = document.getElementById(`idCantidad${prod.id}`)
-    idCantidad.innerHTML = `<h5 class="card-title" id= "idCantidad${prod.id}">Cantidad*: <input type="text" class="inputProd" id="input${prod.id}"></h5>`
-    btnAgregar.onclick = () => {
-        AgregarAlCarrito(prod, btnAgregar)
-    }
+    mostrarCards(verduras)
     mostrarCarrito(arreglo)
-    finalizarCompra (ulCarrito)
 }
 function buscarCards (array) {
     let buscadorCard = document.getElementById(`buscadorCard`)
@@ -163,28 +178,20 @@ function buscarCards (array) {
         }
     }
 }
-function finalizarCompra (ulCarrito) {
+function finalizarCompra () {
     let finCompra = document.getElementById(`finCompra`)
     finCompra.onclick = () => {
+        let ulCarrito = document.getElementById(`ulCarrito`)
         ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`
         carrito.splice(0, carrito.length)
         localStorage.removeItem('carrito')
-        if (carrito.length == 0) {
-            for (let el of verduras) {
-                document.getElementById(`idCantidad${el.id}`).innerHTML = `<h5 class="card-title" id= "idCantidad${el.id}">Cantidad*: <input type="text" class="inputProd" id="input${el.id}"></h5>`
-                document.getElementById(`btnAgregar${el.id}`).innerText = `Agregar al Carrito`
-            }
-            for (let element of encontrarCards) {
-                document.getElementById(`idCantidad${element.id}`).innerHTML = `<h5 class="card-title" id= "idCantidad${el.id}">Cantidad*: <input type="text" class="inputProd" id="input${el.id}"></h5>`
-                document.getElementById(`btnAgregar${element.id}`).innerText = `Agregar al Carrito`
-            }
-        }
         Swal.fire({
             title: 'Genial!',
             text: 'Compra exitosa!',
             icon: 'success',
             confirmButtonText: 'Aceptar'
           })
+          mostrarCards(verduras)
     }
 }
 mostrarCards(verduras)

@@ -13,6 +13,11 @@ body {
     background-color: green;
     color: white;
     border: solid 2px black;
+    margin-top: 5%;
+}
+.btnToast {
+    border: solid 2px black;
+    border-radius: 10px;
 }
 .cardsGrid {
     display: grid;
@@ -64,10 +69,14 @@ body {
 }
 #total {
     font-weight: 700;
+    margin-top: 5%;
 }
 .liFinalizarCompra {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin-top: 10px;
+}
+.textoRojo {
+    color: red;
 }
