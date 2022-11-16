@@ -3,7 +3,7 @@ class Verduleria {
         this.id = id
         this.producto = producto
         this.precio = precio
-        this.cantidad = cantidad
+        this.cantidad = parseInt(cantidad)
         this.imagen = imagen
     }
 }
@@ -15,12 +15,9 @@ const prod5 = new Verduleria(5, 'Durazno', 450, 0, 'https://www.prensalibre.com/
 const prod6 = new Verduleria(6, 'Limon', 135, 0, 'https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg')
 const verduras = [prod1, prod2, prod3, prod4, prod5, prod6]
 let encontrarCards = []
-let carrito = []
+let carrito
+carrito = JSON.parse(localStorage.getItem('carrito', carrito)) || []
 let total = 0
-if (localStorage.getItem('carrito', carrito)) {
-    let traerDatos = JSON.parse(localStorage.getItem('carrito', carrito))
-    carrito = traerDatos
-}
 
 function mostrarCards (array) {
     let cards = document.getElementById('cards')
@@ -92,7 +89,7 @@ function AgregarAlCarrito (element, boton) {
     }
     else {
         let input = document.getElementById(`input${element.id}`)
-        element.cantidad = input.value
+        element.cantidad = parseInt(input.value)
         if (input.value > 0) {
             let textCard = document.getElementById(`textCard${element.id}`)
             textCard.innerHTML = ``
@@ -117,9 +114,7 @@ function mostrarCarrito (array) {
         total = 0
         let ulCarrito = document.getElementById(`ulCarrito`)
         ulCarrito.innerHTML = ""
-        if (array.length == 0) {
-            ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`
-        }
+        array.length == 0 && (ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`)
         for (let el of array) {
             ulCarrito.innerHTML += `<li class="nav-item" id= "liCarrito${el.id}">
                                         <p><span class= "spanCarrito"> Id: </span>${el.id} <span class= "spanCarrito"> Producto: </span> ${el.producto} <span class= "spanCarrito"> Cantidad: </span> ${el.cantidad}<span class= "spanCarrito"> Precio: </span> $${el.precio*el.cantidad}</p> 
@@ -164,9 +159,8 @@ function mostrarCarrito (array) {
 }
 function eliminarProducto (arreglo, prod, crearli) {
     total -= prod.cantidad*prod.precio
-    let ulCarrito = document.getElementById(`ulCarrito`)
     crearli.innerHTML = `<p id= "total">Total: ${total}</p>
-                            <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
+                        <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     liCarrito.remove()
     arreglo.length == 1 ? arreglo.splice(0, 1) : arreglo.splice(arreglo.indexOf(prod), 1)
@@ -181,31 +175,14 @@ function sumarProductos (element, array) {
     mostrarCarrito (array)
 }
 function restarProductos (element, array) {
-    if (element.cantidad == 1) {
-        element.cantidad = element.cantidad
-    }
-    else {
-        element.cantidad --
-        localStorage.setItem('carrito', JSON.stringify(array))
-        mostrarCards (verduras)
-        mostrarCarrito (array)
-    }
+    element.cantidad == 1 ? element.cantidad = element.cantidad : element.cantidad --, localStorage.setItem('carrito', JSON.stringify(array)), mostrarCards (verduras), mostrarCarrito (array)
 }
 function buscarCards (array) {
     let buscadorCard = document.getElementById(`buscadorCard`)
     buscadorCard.oninput = () => {
+        let carta = document.getElementById(`cards`)
         encontrarCards = array.filter(element => element.producto.toLowerCase().includes(buscadorCard.value.toLowerCase()))
-        if (encontrarCards.length > 0) {
-            let carta = document.getElementById(`cards`)
-            carta.classList.add('cardsGrid')
-            mostrarCards(encontrarCards)
-        }
-        else if (encontrarCards.length == 0){
-            let carta = document.getElementById(`cards`)
-            carta.classList.add('carta')
-            carta.classList.remove('cardsGrid')
-            carta.innerHTML = '<p>No se encontro ningun producto con ese nombre.</p>'
-        }
+        encontrarCards.length > 0 ? (carta.classList.add('cardsGrid'), mostrarCards(encontrarCards)) : (carta.classList.add('carta'), carta.classList.remove('cardsGrid'), carta.innerHTML = '<p>No se encontro ningun producto con ese nombre.</p>')
     }
 }
 function finalizarCompra () {
