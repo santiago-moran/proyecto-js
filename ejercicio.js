@@ -170,13 +170,7 @@ function eliminarProducto (arreglo, prod, crearli) {
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     liCarrito.remove()
     arreglo.length == 1 ? arreglo.splice(0, 1) : arreglo.splice(arreglo.indexOf(prod), 1)
-    if (arreglo.length == 0) {
-        localStorage.removeItem('carrito')
-        ulCarrito.innerHTML = `<p class= "textoCarrVacio">(Carrito Vacío)</p>`
-    }
-    else {
-        localStorage.setItem('carrito', JSON.stringify(arreglo))
-    }
+    arreglo.length == 0 ? localStorage.removeItem('carrito') : localStorage.setItem('carrito', JSON.stringify(arreglo))
     mostrarCards(verduras)
     mostrarCarrito(arreglo)
 }
