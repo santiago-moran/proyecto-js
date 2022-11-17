@@ -222,6 +222,16 @@ function ordenarPor(opcion, array) {
     localStorage.setItem('verduras', JSON.stringify(array))
     mostrarCards(array)
 }
-mostrarCards(verduras)
+function spinnerCargar () {
+    let cargando = document.getElementById(`cargando`)
+    cargando.innerHTML = `  <div class="spinner-grow text-success" role="status">
+                                <p class= "textCargar">Cargando productos...</p>
+                            </div>`
+}
+setTimeout(()=> {
+    cargando.remove()
+    mostrarCards(verduras)
+}, 2000)
+spinnerCargar ()
 mostrarCarrito (carrito)
 buscarCards (verduras)
