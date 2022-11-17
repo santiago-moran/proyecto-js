@@ -13,10 +13,11 @@ const prod3 = new Verduleria(3, 'Kiwi', 120, 0, 'https://s1.eestatic.com/2015/02
 const prod4 = new Verduleria(4, 'Naranja', 200, 0, 'https://www.cuerpomente.com/medio/2020/10/21/naranja_b3c2dbbc_1200x1200.jpg')
 const prod5 = new Verduleria(5, 'Durazno', 450, 0, 'https://www.prensalibre.com/wp-content/uploads/2019/08/Durazno.jpg?quality=52')
 const prod6 = new Verduleria(6, 'Limon', 135, 0, 'https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg')
-const verduras = [prod1, prod2, prod3, prod4, prod5, prod6]
-let encontrarCards = []
+let verduras
+verduras = JSON.parse(localStorage.getItem('verduras', verduras)) || [prod1, prod2, prod3, prod4, prod5, prod6]
 let carrito
 carrito = JSON.parse(localStorage.getItem('carrito', carrito)) || []
+let encontrarCards = []
 let total = 0
 
 function mostrarCards (array) {
@@ -71,9 +72,12 @@ function mostrarCards (array) {
             let btnCarrito = document.getElementById(`btnCarrito`)
             btnCarrito.onclick = () => {
                 mostrarCarrito(carrito)
-            }
-            
+            }  
         }    
+        let opcion = document.getElementById(`opcion`)
+        opcion.onchange = () => {
+            ordenarPor(opcion, array)
+        }
 }
 function AgregarAlCarrito (element, boton) {
     if (boton.innerText == 'Agregado') {
@@ -134,7 +138,7 @@ function mostrarCarrito (array) {
             crearli.innerHTML = ""
         }
         else {
-            crearli.innerHTML = `<p id= "total">Total: ${total}</p>
+            crearli.innerHTML = `<p id= "total">Total: $${total}</p>
                             <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
             finalizarCompra()
         }
@@ -159,7 +163,7 @@ function mostrarCarrito (array) {
 }
 function eliminarProducto (arreglo, prod, crearli) {
     total -= prod.cantidad*prod.precio
-    crearli.innerHTML = `<p id= "total">Total: ${total}</p>
+    crearli.innerHTML = `<p id= "total">Total: $${total}</p>
                         <button class= "btn btn-primary" id= "finCompra">Finalizar Compra</button>`
     let liCarrito = document.getElementById(`liCarrito${prod.id}`)
     liCarrito.remove()
@@ -200,6 +204,23 @@ function finalizarCompra () {
           })
           mostrarCards(verduras)
     }
+}
+function ordenarPor(opcion, array) {
+    if (opcion.value == 1) {
+        array.sort((a, b) => a.precio - b.precio)
+    }
+    else if (opcion.value == 2) {
+        array.sort(function(a, b){
+            if(a.producto < b.producto) { return -1; }
+            if(a.producto > b.producto) { return 1; }
+            return 0;
+        })
+    }
+    else if (opcion.value == 3) {
+        array.sort((a, b) => a.id - b.id)
+    }
+    localStorage.setItem('verduras', JSON.stringify(array))
+    mostrarCards(array)
 }
 mostrarCards(verduras)
 mostrarCarrito (carrito)

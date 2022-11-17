@@ -2,6 +2,8 @@ body {
     background-color: antiquewhite;
 }
 .navbar {
+    display: flex;
+    flex-direction: row;
     background-color:coral;
     border-bottom: solid 2px black;
 }
@@ -87,4 +89,13 @@ body {
 }
 .btnRed {
     background-color: red;
+}
+.form-select {
+    width: 250px;
+    margin-right: 20px;
+    margin-top: 13px;
+    height: 40px;
+}
+.divHeader {
+    display: flex;
 }

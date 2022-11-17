@@ -18,19 +18,27 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" id="buscadorCard" type="search" placeholder="Buscar producto" aria-label="Search">
                   </form>
-              <button class="navbar-toggler" id= "btnCarrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Carrito de Compras</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="ulCarrito">
-                    </ul>
-                </div>
-            </div>
+                  <div class="divHeader">
+                    <select class="form-select" id= "opcion" aria-label="Default select example">
+                      <option selected>Ordenar por</option>
+                      <option value="1">Precio</option>
+                      <option value="2">Nombre</option>
+                      <option value="3">Id</option>
+                    </select>
+                <button class="navbar-toggler" id= "btnCarrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Carrito de Compras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="ulCarrito">
+                      </ul>
+                  </div>
+              </div>
+                  </div>
           </nav>
     </header>
     <main>
