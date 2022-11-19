@@ -7,14 +7,19 @@ class Verduleria {
         this.imagen = imagen
     }
 }
-const prod1 = new Verduleria(1, 'Banana', 250, 0, 'https://imagenes.elpais.com/resizer/2HSS64EcGlMNFYHY4P3dDY4TRNw=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/HE3SMC3L7Z7XENXLHLLKE3CDEA.jpg')
-const prod2 = new Verduleria(2, 'Manzana', 300, 0, 'https://elegifruta.com.ar/onepage/wp-content/uploads/2017/07/manzana_roja.jpg')
-const prod3 = new Verduleria(3, 'Kiwi', 120, 0, 'https://s1.eestatic.com/2015/02/20/cocinillas/cocinillas_12508818_115876054_1024x576.jpg')
-const prod4 = new Verduleria(4, 'Naranja', 200, 0, 'https://www.cuerpomente.com/medio/2020/10/21/naranja_b3c2dbbc_1200x1200.jpg')
-const prod5 = new Verduleria(5, 'Durazno', 450, 0, 'https://www.prensalibre.com/wp-content/uploads/2019/08/Durazno.jpg?quality=52')
-const prod6 = new Verduleria(6, 'Limon', 135, 0, 'https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg')
 let verduras
-verduras = JSON.parse(localStorage.getItem('verduras', verduras)) || [prod1, prod2, prod3, prod4, prod5, prod6]
+verduras = JSON.parse(localStorage.getItem('verduras', verduras)) || []
+if (verduras.length == 0) {
+    const cargarVerduras = async () => {
+        const response = await fetch ("data.json")
+        const data = await response.json()
+        for (let verdura of data) {
+            let verduraNueva = new Verduleria (verdura.id, verdura.producto, verdura.precio, verdura.cantidad, verdura.imagen)
+            verduras.push(verduraNueva)
+        }
+    }
+    cargarVerduras()
+}
 let carrito
 carrito = JSON.parse(localStorage.getItem('carrito', carrito)) || []
 let encontrarCards = []

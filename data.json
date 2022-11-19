@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "producto": "Banana",
+        "precio": 250,
+        "cantidad": 0,
+        "imagen": "https://imagenes.elpais.com/resizer/2HSS64EcGlMNFYHY4P3dDY4TRNw=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/HE3SMC3L7Z7XENXLHLLKE3CDEA.jpg"
+    },
+    {
+        "id": 2,
+        "producto": "Manzana",
+        "precio": 300,
+        "cantidad": 0,
+        "imagen": "https://elegifruta.com.ar/onepage/wp-content/uploads/2017/07/manzana_roja.jpg"
+    },
+    {
+        "id": 3,
+        "producto": "Kiwi",
+        "precio": 120,
+        "cantidad": 0,
+        "imagen": "https://s1.eestatic.com/2015/02/20/cocinillas/cocinillas_12508818_115876054_1024x576.jpg"
+    },
+    {
+        "id": 4,
+        "producto": "Naranja",
+        "precio": 200,
+        "cantidad": 0,
+        "imagen": "https://www.cuerpomente.com/medio/2020/10/21/naranja_b3c2dbbc_1200x1200.jpg"
+    },
+    {
+        "id": 5,
+        "producto": "Durazno",
+        "precio": 450,
+        "cantidad": 0,
+        "imagen": "https://www.prensalibre.com/wp-content/uploads/2019/08/Durazno.jpg?quality=52"
+    },
+    {
+        "id": 6,
+        "producto": "Limon",
+        "precio": 135,
+        "cantidad": 0,
+        "imagen": "https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg"
+    }
+]
