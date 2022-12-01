@@ -1,44 +1,74 @@
 [
     {
         "id": 1,
-        "producto": "Banana",
-        "precio": 250,
+        "producto": "Barista",
+        "precio": 2000,
         "cantidad": 0,
-        "imagen": "https://imagenes.elpais.com/resizer/2HSS64EcGlMNFYHY4P3dDY4TRNw=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/HE3SMC3L7Z7XENXLHLLKE3CDEA.jpg"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Nuestro tradicional espresso. Una cuidadosa selección de granos brasileros, permiten obtener un café pleno, de cuerpo suave, sin acidez ni amargor."
     },
     {
         "id": 2,
-        "producto": "Manzana",
-        "precio": 300,
+        "producto": "Minka",
+        "precio": 1875,
         "cantidad": 0,
-        "imagen": "https://elegifruta.com.ar/onepage/wp-content/uploads/2017/07/manzana_roja.jpg"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Desarrollado para satisfacer a los amantes del espresso intenso. Café de gran cuerpo, con un sabor especiado y una delicada acidez."
     },
     {
         "id": 3,
-        "producto": "Kiwi",
-        "precio": 120,
+        "producto": "Colombia",
+        "precio": 2400,
         "cantidad": 0,
-        "imagen": "https://s1.eestatic.com/2015/02/20/cocinillas/cocinillas_12508818_115876054_1024x576.jpg"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Café suave, con gusto perfumado y afrutado. Su delicada acidez, lo hace inconfundible."
     },
     {
         "id": 4,
-        "producto": "Naranja",
-        "precio": 200,
+        "producto": "Brasil",
+        "precio": 2000,
         "cantidad": 0,
-        "imagen": "https://www.cuerpomente.com/medio/2020/10/21/naranja_b3c2dbbc_1200x1200.jpg"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Un café de cuerpo medio, con notas dulces, sin amargor, que produce una placentera sensación al degustarlo."
     },
     {
         "id": 5,
-        "producto": "Durazno",
-        "precio": 450,
+        "producto": "Scegliere",
+        "precio": 2400,
         "cantidad": 0,
-        "imagen": "https://www.prensalibre.com/wp-content/uploads/2019/08/Durazno.jpg?quality=52"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Formado por tres de nuestros mejores varietales: Brasil, Colombia y Moka. Una combinación única, café de cuerpo medio, levemente acidulado y estructuralmente complejo."
     },
     {
         "id": 6,
-        "producto": "Limon",
-        "precio": 135,
+        "producto": "Mezcla Superior",
+        "precio": 2550,
         "cantidad": 0,
-        "imagen": "https://mejorconsalud.as.com/wp-content/uploads/2015/05/beneficios-del-limon-posiblemente-no-conocias.jpg"
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "70% Torrado 30% Tostado",
+        "descripcion": "Un café moderado en el que se destaca su placentero aroma y particular sabor."
+    },
+    {
+        "id": 7,
+        "producto": "Descafeinado",
+        "precio": 2700,
+        "cantidad": 0,
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": "Tostado",
+        "descripcion": "Café suave, de cuerpo medio y un aroma que refleja la misma sensación que los cafés tradicionales. Recomendado para personas sensibles a la cafeína."
+    },
+    {
+        "id": 8,
+        "producto": "Mezcla Santos",
+        "precio": 2500,
+        "cantidad": 0,
+        "imagen": "./imagenes/grano-cafe.png",
+        "tipo": " 50% Tostado 50% Torrado",
+        "descripcion": "Un café equilibrado. Recomendado para tomar solo o con leche. El clásico 'cortado en casa'."
     }
 ]

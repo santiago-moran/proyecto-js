@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Tienda de Café - CATÁLOGO</title>
+</head>
+<body class="bodyCat">
+    <header>
+        <nav class="navbar barraNav">
+            <div class="container-fluid divTexto">
+                <div class=" container-fluid divHeader">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" id="buscadorCard" type="search" placeholder="Buscar producto"
+                            aria-label="Search">
+                    </form>
+                    <a class="textoNav" href="./index.html">TIENDA <span class="deCafe">DE CAFE</span></a>
+                    <select class="form-select" id="opcion" aria-label="Default select example">
+                        <option selected>Ordenar por</option>
+                        <option value="1">Precio</option>
+                        <option value="2">Nombre</option>
+                        <option value="3">Id</option>
+                    </select>
+                    <button class="navbar-toggler iconCatalogo" id="btnCarrito" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <i class="fa-sharp fa-solid fa-cart-shopping carritoCompras"></i>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header divCarrito">
+                            <h5 class="offcanvas-title textoCarrito" id="offcanvasNavbarLabel">CARRITO <span
+                                class="deCompras">DE COMPRAS</span>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close">X
+                            </button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="ulCarrito"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="cargando"></div>
+        <div id= "titCat"></div>
+        <section id="cards" class="cardsGrid"></section>
+        <div id="subTitCat"></div>
+        <section id="sectionHistorial">
+            <div id="tituloHistorial"></div>
+            <div id="contenidoHistorial"></div>
+        </section>
+    </main>
+    <footer id="footerCatalogo"></footer>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.0/build/global/luxon.min.js"></script>
+    <script src="https://kit.fontawesome.com/79a487990f.js" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>
