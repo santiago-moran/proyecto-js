@@ -4,7 +4,7 @@
         "producto": "Barista",
         "precio": 2000,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Nuestro tradicional espresso. Una cuidadosa selección de granos brasileros, permiten obtener un café pleno, de cuerpo suave, sin acidez ni amargor."
     },
@@ -13,7 +13,7 @@
         "producto": "Minka",
         "precio": 1875,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Desarrollado para satisfacer a los amantes del espresso intenso. Café de gran cuerpo, con un sabor especiado y una delicada acidez."
     },
@@ -22,7 +22,7 @@
         "producto": "Colombia",
         "precio": 2400,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Café suave, con gusto perfumado y afrutado. Su delicada acidez, lo hace inconfundible."
     },
@@ -31,7 +31,7 @@
         "producto": "Brasil",
         "precio": 2000,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Un café de cuerpo medio, con notas dulces, sin amargor, que produce una placentera sensación al degustarlo."
     },
@@ -40,7 +40,7 @@
         "producto": "Scegliere",
         "precio": 2400,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Formado por tres de nuestros mejores varietales: Brasil, Colombia y Moka. Una combinación única, café de cuerpo medio, levemente acidulado y estructuralmente complejo."
     },
@@ -49,7 +49,7 @@
         "producto": "Mezcla Superior",
         "precio": 2550,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "70% Torrado 30% Tostado",
         "descripcion": "Un café moderado en el que se destaca su placentero aroma y particular sabor."
     },
@@ -58,7 +58,7 @@
         "producto": "Descafeinado",
         "precio": 2700,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": "Tostado",
         "descripcion": "Café suave, de cuerpo medio y un aroma que refleja la misma sensación que los cafés tradicionales. Recomendado para personas sensibles a la cafeína."
     },
@@ -67,7 +67,7 @@
         "producto": "Mezcla Santos",
         "precio": 2500,
         "cantidad": 0,
-        "imagen": "../imagenes/grano-cafe.png",
+        "imagen": "./imagenes/grano-cafe.png",
         "tipo": " 50% Tostado 50% Torrado",
         "descripcion": "Un café equilibrado. Recomendado para tomar solo o con leche. El clásico 'cortado en casa'."
     }
