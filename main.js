@@ -339,9 +339,7 @@ function comprobarInputForm() {
     let divForm = document.getElementsByClassName(`divForm`)
     for (let i = 0; i <= 3; i++) {
         formularioControl[i].oninput = () => {
-            if (formularioControl[i].value != "") {
-                divForm[i].innerHTML = ""
-            }
+            formularioControl[i].value != "" && (divForm[i].innerHTML = "")
         }
     }
 }
@@ -356,26 +354,10 @@ function enviarFormulario() {
     let divRecomend = document.getElementById(`divRecomend`)
     let recomend = document.getElementById(`recomend`)
     if (nombre.value == "" || telefono.value == "" || mail.value == "" || recomend.value == "") {
-        if (nombre.value == "") {
-            divNombre.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`
-        } else {
-            divNombre.innerHTML = ``
-        }
-        if (telefono.value == "") {
-            divTelefono.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`
-        } else {
-            divTelefono.innerHTML = ``
-        }
-        if (mail.value == "") {
-            divMail.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`
-        } else {
-            divMail.innerHTML = ``
-        }
-        if (recomend.value == "") {
-            divRecomend.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`
-        } else {
-            divRecomend.innerHTML = ``
-        }
+        nombre.value == "" ? (divNombre.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`) : (divNombre.innerHTML = ``)
+        telefono.value == "" ? (divTelefono.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`) : (divTelefono.innerHTML = ``)
+        mail.value == "" ? (divMail.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`) : (divMail.innerHTML = ``)
+        recomend.value == "" ? (divRecomend.innerHTML = `<p class= "textoRojo">*Datos Incompletos</p>`) : (divRecomend.innerHTML = ``)
     } else {
         divNombre.innerHTML = ``
         divTelefono.innerHTML = ``
