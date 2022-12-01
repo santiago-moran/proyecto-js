@@ -47,7 +47,7 @@ function mostrarCards(array) {
                                                 <p class= "textImagen"> <span class= "spanImgText">${cafe.tipo} </span> <br>${cafe.descripcion}</p
                                             </div>
                                     <div class="card-body" id="card${cafe.id}">
-                                        <h5 class="card-title">$<span class= "spanImgText">${cafe.id}</span>. ${cafe.producto}</h5>
+                                        <h5 class="card-title"><span class= "spanImgText">${cafe.id}</span>. ${cafe.producto}</h5>
                                         <h5 class="card-title"><span class= "spanImgText">Precio x 1/4 kg: </span>$${cafe.precio}</h5>
                                         <div id= "divCantidad${cafe.id}">
                                             <h5 class="card-title" id= "idCantidad${cafe.id}"><span class= "spanImgText">Cantidad: </span>${cafe.cantidad}</h5>
