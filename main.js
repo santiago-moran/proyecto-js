@@ -13,7 +13,7 @@ let coffes
 coffes = JSON.parse(localStorage.getItem('cafes', coffes)) || []
 if (coffes.length == 0) {
     const cargarCafes = async () => {
-        const response = await fetch("data.json")
+        const response = await fetch("../data.json")
         const data = await response.json()
         for (let cafe of data) {
             let cafeNuevo = new Cafes(cafe.id, cafe.producto, cafe.precio, cafe.cantidad, cafe.imagen, cafe.tipo, cafe.descripcion)
