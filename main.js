@@ -219,8 +219,11 @@ function buscarCards(array) {
     let buscadorCard = document.getElementById(`buscadorCard`)
     buscadorCard.oninput = () => {
         let carta = document.getElementById(`cards`)
+        let tituloCatalogo = document.getElementById(`titCat`)
+        let subtitulo = document.getElementById(`subTitCat`)
+        let footerCatalogo = document.getElementById(`footerCatalogo`)
         encontrarCards = array.filter(element => element.producto.toLowerCase().includes(buscadorCard.value.toLowerCase()))
-        encontrarCards.length > 0 ? (carta.classList.add('cardsGrid'), mostrarCards(encontrarCards)) : (carta.classList.add('carta'), carta.classList.remove('cardsGrid'), carta.innerHTML = '<p class= "textoBuscar">No se encontro ningun producto con ese nombre.</p>')
+        encontrarCards.length > 0 ? (carta.classList.add('cardsGrid'), mostrarCards(encontrarCards)) : (carta.classList.add('carta'), carta.classList.remove('cardsGrid'), carta.innerHTML = '<p class= "textoBuscar">No se encontro ningun producto con ese nombre.</p>', tituloCatalogo.innerHTML = "", subtitulo.innerHTML = "", footerCatalogo.innerHTML = "")
     }
 }
 
